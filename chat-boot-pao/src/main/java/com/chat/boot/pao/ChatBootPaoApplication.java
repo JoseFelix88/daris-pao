@@ -23,7 +23,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 public class ChatBootPaoApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChatBootPaoApplication.class, args);
+		SpringApplication.run( ChatBootPaoApplication.class, args);
 	}
 
 	
