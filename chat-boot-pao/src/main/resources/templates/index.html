@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
 <head>
 <meta charset="utf-8">
 
@@ -39,12 +41,15 @@
   </div>
 </nav>
 		
-		<div class="container-sm">
-     <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Consultar libros" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-success" type="button" id="button-addon2">Buscar</button>
-  </div>
+<div class="container-sm">
+   <div class="input-group mb-3">
+		<form th:action="@{/consulta/libro}" method="post" >
+		  <input type="text" class="form-control" placeholder="Consultar libros" aria-label="Recipient's username" aria-describedby="button-addon2"
+  			th:value="*{search}">
+			  <div class="input-group-append">
+			    <button class="btn btn-success" type="submit" id="button-addon2">Buscar</button>
+			  </div>
+		</form>
 </div>
 </div>
 
