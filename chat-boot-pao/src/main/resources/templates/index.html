@@ -9,7 +9,8 @@
 
     <!-- Bootstrap core CSS -->
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-		
+		<script th:src="@{/js/jquery/3.3.1/jquery.min.js}"></script>	
+		<script th:src="@{/js/consultaLibro.js}"></script>	
 	<!-- Custom styles for this template -->
     	<link href="csspriv/navbar-top.css" rel="stylesheet">
     	<link href="csspriv/style.css" rel="stylesheet">
@@ -43,11 +44,11 @@
 		
 <div class="container-sm">
    <div class="input-group mb-3">
-		<form th:action="@{/consulta/libro}" method="post">
+		<form id="formConsultaLibro" th:action="@{/consulta/libro}" method="get">
 		  <input type="text" class="form-control" placeholder="Consultar libros" aria-label="Recipient's username" aria-describedby="button-addon2"
-			th:value="*{search}">
+			 id="textSearch">
 			  <div class="input-group-append">
-			    <button class="btn btn-success" type="submit" id="button-addon2">Buscar</button>
+			    <button class="btn btn-success" type="button" onclick="consultarLibro()" id="button-addon2">Buscar</button>
 			  </div>
 		</form>
 </div>

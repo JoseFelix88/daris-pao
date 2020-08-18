@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,9 +33,9 @@ public class ConsultaLibroController implements Serializable {
 		return "index";
 	}
 	
-	@PostMapping("/consulta/libro/{search}")
-	public String consultarLibro(@PathVariable("search") String search) {
-		log.info("Search: "+ search);
+	@GetMapping("/consulta/libro/{textSearch}")
+	public String consultarLibro(@PathVariable("textSearch") String textSearch) {
+		log.info("Search: "+ textSearch);
 		libroService.listarLibros().forEach(libro -> log.info(libro.toString()));
 		return "index";
 	}
