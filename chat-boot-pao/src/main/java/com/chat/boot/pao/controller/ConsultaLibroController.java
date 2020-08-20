@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import com.chat.boot.pao.service.LibroService;
+import com.chat.boot.pao.service.impl.AgenteDispatcherService;
 
 @Controller
 public class ConsultaLibroController implements Serializable {
@@ -25,7 +23,7 @@ public class ConsultaLibroController implements Serializable {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired 
-	private LibroService libroService;
+	private AgenteDispatcherService agenteDispatcherService;
 	
 	@GetMapping("/index")
 	public String index(Model model) {
@@ -36,7 +34,7 @@ public class ConsultaLibroController implements Serializable {
 	@GetMapping("/consulta/libro/{textSearch}")
 	public String consultarLibro(@PathVariable("textSearch") String textSearch) {
 		log.info("Search: "+ textSearch);
-		libroService.listarLibros().forEach(libro -> log.info(libro.toString()));
+		agenteDispatcherService.setParameterSearch(textSearch);
 		return "index";
 	}
 	
