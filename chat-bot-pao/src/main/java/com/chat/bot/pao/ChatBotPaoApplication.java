@@ -1,4 +1,4 @@
-package com.chat.boot.pao;
+package com.chat.bot.pao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,11 +17,10 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 @SpringBootApplication
-//@EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
-public class ChatBootPaoApplication implements WebMvcConfigurer {
+public class ChatBotPaoApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
-		SpringApplication.run( ChatBootPaoApplication.class, args);
+		SpringApplication.run(ChatBotPaoApplication.class, args);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class ChatBootPaoApplication implements WebMvcConfigurer {
 
 	/**
 	 * <p>
-	 * Bean encargado de la instanciación de la view index de la aplicación. 
+	 * Bean encargado de la instanciación de la view index de la aplicación.
 	 * </p>
 	 *
 	 * @return the thymeleaf view
@@ -48,8 +47,8 @@ public class ChatBootPaoApplication implements WebMvcConfigurer {
 
 	/**
 	 * <p>
-	 * Bean encargado de resolver la inicialización de los textos y los
-	 * caracteres soportados para el mismó.
+	 * Bean encargado de resolver la inicialización de los textos y los caracteres
+	 * soportados para el mismó.
 	 * </p>
 	 *
 	 * @return the class loader template resolver
@@ -85,8 +84,8 @@ public class ChatBootPaoApplication implements WebMvcConfigurer {
 
 	/**
 	 * <p>
-	 * Bean encargado de instanciar la ingenieria aplicada al motor de plantillas y su 
-	 * codificación de caracteres.
+	 * Bean encargado de instanciar la ingenieria aplicada al motor de plantillas y
+	 * su codificación de caracteres.
 	 * </p>
 	 *
 	 * @return the view resolver
@@ -102,8 +101,8 @@ public class ChatBootPaoApplication implements WebMvcConfigurer {
 
 	/**
 	 * <p>
-	 * Bean que inicializa los objetos de tipo Date o Calendar para poder ser manipulados en las 
-	 * plantillas Thymeleaf.
+	 * Bean que inicializa los objetos de tipo Date o Calendar para poder ser
+	 * manipulados en las plantillas Thymeleaf.
 	 * </p>
 	 *
 	 * @return the java 8 time dialect
@@ -112,5 +111,4 @@ public class ChatBootPaoApplication implements WebMvcConfigurer {
 	public Java8TimeDialect java8TimeDialect() {
 		return new Java8TimeDialect();
 	}
-	
 }

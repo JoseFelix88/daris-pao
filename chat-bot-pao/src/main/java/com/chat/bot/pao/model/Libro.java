@@ -1,4 +1,4 @@
-package com.chat.boot.pao.model;
+package com.chat.bot.pao.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

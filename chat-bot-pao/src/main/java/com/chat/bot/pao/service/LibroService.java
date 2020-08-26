@@ -1,8 +1,8 @@
-package com.chat.boot.pao.service;
+package com.chat.bot.pao.service;
 
 import java.util.List;
 
-import com.chat.boot.pao.model.Libro;
+import com.chat.bot.pao.model.Libro;
 
 public interface LibroService {
 

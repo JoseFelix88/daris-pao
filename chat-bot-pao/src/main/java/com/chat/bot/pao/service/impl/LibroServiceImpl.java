@@ -1,13 +1,13 @@
-package com.chat.boot.pao.service.impl;
+package com.chat.bot.pao.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chat.boot.pao.model.Libro;
-import com.chat.boot.pao.repository.LibroRepository;
-import com.chat.boot.pao.service.LibroService;
+import com.chat.bot.pao.model.Libro;
+import com.chat.bot.pao.repository.LibroRepository;
+import com.chat.bot.pao.service.LibroService;
 
 @Service
 public class LibroServiceImpl implements LibroService {
