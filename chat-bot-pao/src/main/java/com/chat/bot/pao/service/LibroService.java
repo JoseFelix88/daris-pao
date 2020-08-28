@@ -8,4 +8,6 @@ public interface LibroService {
 
 	List<Libro> listarLibros();
 	
+	void initAgent(); 
+	
 }

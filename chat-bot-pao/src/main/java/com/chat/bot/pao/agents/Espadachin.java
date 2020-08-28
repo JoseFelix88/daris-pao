@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 
-import com.chat.bot.pao.ChatBotPaoApplication;
+import com.chat.bot.pao.service.impl.LibroServiceImpl;
 
 import akka.actor.UntypedActor;
 
@@ -27,7 +27,7 @@ public class Espadachin extends UntypedActor {
         log.info("[Espadachin] ha recibido el mensaje: \"{}\".", o);
 
         if (o == Mensaje.ESPADA_ROTA) {
-        	ChatBotPaoApplication.herrero.tell(Herrero.Mensaje.CREAR_ESPADA, getSelf());
+        	LibroServiceImpl.herrero.tell(Herrero.Mensaje.CREAR_ESPADA, getSelf());
         } else if (o == Mensaje.ESPADA_NUEVA) {
             getContext().stop(getSelf());
         } else {

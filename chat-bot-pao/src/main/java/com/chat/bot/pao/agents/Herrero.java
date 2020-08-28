@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 
-import com.chat.bot.pao.ChatBotPaoApplication;
 import com.chat.bot.pao.service.impl.HerreroService;
+import com.chat.bot.pao.service.impl.LibroServiceImpl;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
@@ -43,7 +43,7 @@ public class Herrero extends UntypedActor {
  
         if (o == Mensaje.CREAR_ESPADA) {
             espadachines.add(getSender());
-            ChatBotPaoApplication.minero.tell(Minero.Mensaje.OBTENER_MATERIALES, getSelf());
+            LibroServiceImpl.minero.tell(Minero.Mensaje.OBTENER_MATERIALES, getSelf());
         } else if (o == Mensaje.MATERIALES) {
             log.info("[Herrero] está creando espada...");
             herreroService.crearEspada();

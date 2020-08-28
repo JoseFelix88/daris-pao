@@ -25,13 +25,13 @@ import akka.actor.ActorSystem;
 @SpringBootApplication
 public class ChatBotPaoApplication implements WebMvcConfigurer {
 
-	public static ActorRef espadachin;
+	/*public static ActorRef espadachin;
 	public static ActorRef herrero;
-	public static ActorRef minero;
+	public static ActorRef minero;*/
 
 	public static void main(String[] args) {
-		final ConfigurableApplicationContext applicationContext = SpringApplication.run(ChatBotPaoApplication.class,
-				args);
+		SpringApplication.run(ChatBotPaoApplication.class, args);
+		/*final ConfigurableApplicationContext applicationContext = SpringApplication.run(ChatBotPaoApplication.class, args);
 		ActorSystem actorSystem = applicationContext.getBean(ActorSystem.class);
 
 		espadachin = actorSystem.actorOf(SpringExtension.SPRING_EXTENSION_PROVIDER.get(actorSystem).props("espadachin"),
@@ -41,7 +41,7 @@ public class ChatBotPaoApplication implements WebMvcConfigurer {
 		minero = actorSystem.actorOf(SpringExtension.SPRING_EXTENSION_PROVIDER.get(actorSystem).props("minero"),
 				"minero");
 
-		espadachin.tell(Espadachin.Mensaje.ESPADA_ROTA, ActorRef.noSender());
+		espadachin.tell(Espadachin.Mensaje.ESPADA_ROTA, ActorRef.noSender());*/
 	}
 
 	@Override
