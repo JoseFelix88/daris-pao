@@ -8,6 +8,6 @@ public interface LibroService {
 
 	List<Libro> listarLibros();
 	
-	void initAgent(); 
+	List<Libro> obtenerLibrosByNombre(String nombreLibro);
 	
 }

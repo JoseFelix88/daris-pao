@@ -12,7 +12,7 @@ import com.chat.bot.pao.model.Libro;
 public interface LibroRepository extends PagingAndSortingRepository<Libro, Integer> {
 
 	
-	@Query(value = "Select * from Libros where nombre_libro like %?1%", nativeQuery = true)
+	@Query(value = "Select * from Libros where nombre_libro like ?1", nativeQuery = true)
 	List<Libro> findByNombreLibro(String nombreLibro);
 	
 }

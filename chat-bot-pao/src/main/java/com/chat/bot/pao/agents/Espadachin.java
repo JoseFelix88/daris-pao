@@ -1,21 +1,36 @@
 package com.chat.bot.pao.agents;
 
+import java.util.List;
+
 import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.util.ObjectUtils;
 
-import com.chat.bot.pao.service.impl.LibroServiceImpl;
+import com.chat.bot.pao.agents.util.AgentFactory;
+import com.chat.bot.pao.model.Libro;
+import com.chat.bot.pao.model.dto.LibroDTO;
 
 import akka.actor.UntypedActor;
 
+@SuppressWarnings("deprecation")
 @Named("espadachin")
 @Scope("prototype")
 public class Espadachin extends UntypedActor {
 
+	private List<Libro> listLibros;
 
-    public enum Mensaje {
+    public List<Libro> getListLibros() {
+		return listLibros;
+	}
+
+	public void setListLibros(List<Libro> listLibros) {
+		this.listLibros = listLibros;
+	}
+
+	public enum Mensaje {
         ESPADA_NUEVA,
         ESPADA_ROTA;
     }
@@ -25,11 +40,13 @@ public class Espadachin extends UntypedActor {
     @Override
     public void onReceive(Object o) {
         log.info("[Espadachin] ha recibido el mensaje: \"{}\".", o);
-
-        if (o == Mensaje.ESPADA_ROTA) {
-        	LibroServiceImpl.herrero.tell(Herrero.Mensaje.CREAR_ESPADA, getSelf());
-        } else if (o == Mensaje.ESPADA_NUEVA) {
-            getContext().stop(getSelf());
+        LibroDTO libro = (LibroDTO) o;
+        
+        if(ObjectUtils.isEmpty(libro.getListLibros())) {
+        	AgentFactory.herrero.tell(libro, getSelf());
+        } else if(!ObjectUtils.isEmpty(libro.getListLibros())) {
+//        	getContext().stop(getSelf());
+        	this.setListLibros(libro.getListLibros());
         } else {
             unhandled(o);
         }
