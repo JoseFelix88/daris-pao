@@ -58,7 +58,7 @@ public class ConsultaLibroController implements Serializable {
 	public String cargarChat(HttpServletRequest request, Model model) {
 		List<Libro> lstLibros = LIST_LIBROS;
 		lstLibros.forEach(libro -> log.info(!ObjectUtils.isEmpty(libro) ? libro.toString(): ""));
-		
+		model.addAttribute("lstLibros", lstLibros);
 		return "consultar";
 	}
 	

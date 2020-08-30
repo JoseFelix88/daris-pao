@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 
@@ -169,28 +170,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>30</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>ç
-                <td>40</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>50</td>
-              </tr>
-            
+	            <tr th:each="libro, rowStat : ${lstLibros}">
+	            	<td align="center" style="vertical-align: middle;" th:text="${rowStat.count}"></td>
+	            	<td align="center" style="vertical-align: middle;" th:text="${libro.nombreLibro}"></td>
+	            	<td align="center" style="vertical-align: middle;" th:text="${libro.autor}"></td>
+	            	<td align="center" style="vertical-align: middle;" th:text="${libro.libreria}"></td>
+	            	<td align="center" style="vertical-align: middle;" th:text="${libro.precio}"></td>
+	            </tr>
             </tbody>
           </table>
     </div>
