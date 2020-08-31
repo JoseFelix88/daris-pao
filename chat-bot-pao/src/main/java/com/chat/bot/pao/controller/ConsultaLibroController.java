@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.chat.bot.pao.agents.util.AgentFactory;
 import com.chat.bot.pao.model.Libro;
+import com.chat.bot.pao.model.dto.LibroDTO;
 import com.chat.bot.pao.service.LibroService;
 
 @Controller
@@ -26,40 +27,56 @@ public class ConsultaLibroController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 8948123656105059208L;
-	
+
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired 
+
+	@Autowired
 	private AgentFactory agentFactory;
-	
-	@Autowired 
+
+	@Autowired
 	private LibroService libroService;
-	
+
 	List<Libro> LIST_LIBROS = new ArrayList();
-	
+
+	List<Libro> LIST_LIBROS_RECOMENDADOS = new ArrayList();
+
 	@GetMapping("/index")
 	public String index(Model model) {
 		return "index";
 	}
-	
+
 	@GetMapping("/consulta/libro/{textSearch}")
 	public String consultarLibro(@PathVariable("textSearch") String textSearch, HttpServletRequest request) {
-		log.info("Search: "+ textSearch);
-		if(!agentFactory.existsAgent()) {
+		log.info("Search: " + textSearch);
+		if (!agentFactory.existsAgent()) {
 			agentFactory.initAgent();
 		}
-		List<Libro> lstLibros = libroService.obtenerLibrosByNombre(textSearch);
-		LIST_LIBROS = lstLibros;
+		LibroDTO libroDTO = libroService.obtenerLibrosByNombre(textSearch);
+		LIST_LIBROS = libroDTO.getListLibros();
+		LIST_LIBROS_RECOMENDADOS = libroDTO.getListLibrosRecomendados();
 		return "consultar";
 	}
-	
-	
+
 	@GetMapping("/chatbot/index/")
 	public String cargarChat(HttpServletRequest request, Model model) {
-		List<Libro> lstLibros = LIST_LIBROS;
-		lstLibros.forEach(libro -> log.info(!ObjectUtils.isEmpty(libro) ? libro.toString(): ""));
-		model.addAttribute("lstLibros", lstLibros);
+		StringBuilder mensajeChat = new StringBuilder();;
+		if(!ObjectUtils.isEmpty(LIST_LIBROS)) {
+			mensajeChat.append( "Hola, espero estes bien, he encontrado el siguiente listado de libros: \n");
+			LIST_LIBROS.forEach(libro ->{
+				mensajeChat.append(libro.getNombreLibro()).append("\t");	
+				
+			});
+		} else {
+			mensajeChat.append("Hola, espero estes bien, lo lamento no he podido encontrar alguna conincidencia exacta con tu busqueda. " );
+		}
+
+		if(!ObjectUtils.isEmpty(LIST_LIBROS_RECOMENDADOS)) {
+			mensajeChat.append("\nTe suguiero revises el listado de recomendaciones.");
+		}
+		log.info(mensajeChat.toString());
+		model.addAttribute("lstLibros", LIST_LIBROS_RECOMENDADOS);
+		model.addAttribute("mensajeChat", mensajeChat.toString());
 		return "consultar";
 	}
-	
+
 }

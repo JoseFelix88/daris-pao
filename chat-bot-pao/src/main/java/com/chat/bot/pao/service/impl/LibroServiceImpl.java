@@ -27,17 +27,16 @@ public class LibroServiceImpl implements LibroService {
 	}
 
 	@Override
-	public List<Libro> obtenerLibrosByNombre(String nombreLibro) {
+	public LibroDTO obtenerLibrosByNombre(String nombreLibro) {
 		LibroDTO libroDto = new LibroDTO();
 		libroDto.setNombreLibro(nombreLibro);
 		AgentFactory.espadachin.tell(libroDto, ActorRef.noSender());
 		try {
 			crearEspada();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return libroDto.getListLibros();
+		return libroDto;
 	}
 	
 	public void crearEspada() throws InterruptedException {

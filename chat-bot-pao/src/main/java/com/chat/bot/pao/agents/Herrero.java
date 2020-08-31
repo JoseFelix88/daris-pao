@@ -49,6 +49,8 @@ public class Herrero extends UntypedActor {
 		LibroDTO libro = (LibroDTO) message;
 		List<Libro> lstLibros = herreroService.obtenerListaLibrosBynombre(libro.getNombreLibro());
 		libro.setListLibros(lstLibros);
+		List<Libro> listLibrosRecomendados = herreroService.obtenerListaLibrosRecomendados(libro.getListLibros(), libro.getNombreLibro());
+		libro.setListLibrosRecomendados(listLibrosRecomendados);
 		if(!ObjectUtils.isEmpty(lstLibros)) {
 			AgentFactory.espadachin.tell(libro, getSelf());
 		} else {

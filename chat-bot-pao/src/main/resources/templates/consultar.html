@@ -72,8 +72,11 @@
         <div class="title">Chat</div>
     </div>
     <ul class="messages"></ul>
+    <div th:text="*{mensajeChat}" ></div>
     <div class="bottom_wrapper clearfix">
         <div class="message_input_wrapper">
+        	
+        	
             <input class="message_input" placeholder="Type your message here..." />
         </div>
         <div class="send_message">
@@ -96,7 +99,7 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-   (function () {
+  /* (function () {
      var Message;
      Message = function (arg) {
          this.text = arg.text, this.message_side = arg.message_side;
@@ -152,7 +155,7 @@
              return sendMessage('I\'m fine, thank you!');
          }, 2000);
      });
- }.call(this));
+ }.call(this));*/
 </script>
     </div>
 
@@ -171,11 +174,11 @@
             </thead>
             <tbody>
 	            <tr th:each="libro, rowStat : ${lstLibros}">
-	            	<td align="center" style="vertical-align: middle;" th:text="${rowStat.count}"></td>
-	            	<td align="center" style="vertical-align: middle;" th:text="${libro.nombreLibro}"></td>
-	            	<td align="center" style="vertical-align: middle;" th:text="${libro.autor}"></td>
-	            	<td align="center" style="vertical-align: middle;" th:text="${libro.libreria}"></td>
-	            	<td align="center" style="vertical-align: middle;" th:text="${libro.precio}"></td>
+	            	<td  style="vertical-align: middle;" th:text="${rowStat.count}"></td>
+	            	<td style="vertical-align: middle;" th:text="${libro.nombreLibro}"></td>
+	            	<td style="vertical-align: middle;" th:text="${libro.autor}"></td>
+	            	<td style="vertical-align: middle;" th:text="${libro.libreria}"></td>
+	            	<td style="vertical-align: middle;" th:text="${libro.precio}"></td>
 	            </tr>
             </tbody>
           </table>
