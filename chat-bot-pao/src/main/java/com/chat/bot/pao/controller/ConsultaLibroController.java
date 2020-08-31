@@ -63,8 +63,12 @@ public class ConsultaLibroController implements Serializable {
 		if(!ObjectUtils.isEmpty(LIST_LIBROS)) {
 			mensajeChat.append( "Hola, espero estes bien, he encontrado el siguiente listado de libros: \n");
 			LIST_LIBROS.forEach(libro ->{
-				mensajeChat.append(libro.getNombreLibro()).append("\t");	
-				
+				mensajeChat.append(libro.getNombreLibro());	
+				if(LIST_LIBROS.size() > 1) {
+					mensajeChat.append(",");
+				}else {
+					mensajeChat.append("\t\t");
+				}
 			});
 		} else {
 			mensajeChat.append("Hola, espero estes bien, lo lamento no he podido encontrar alguna conincidencia exacta con tu busqueda. " );
