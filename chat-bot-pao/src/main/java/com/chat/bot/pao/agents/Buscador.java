@@ -14,45 +14,46 @@ import org.springframework.util.ObjectUtils;
 import com.chat.bot.pao.agents.util.AgentFactory;
 import com.chat.bot.pao.model.Libro;
 import com.chat.bot.pao.model.dto.LibroDTO;
-import com.chat.bot.pao.service.impl.HerreroService;
+import com.chat.bot.pao.service.impl.BuscadorService;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 
-@Named("herrero")
+@Named("buscador")
 @Scope("prototype")
-public class Herrero extends UntypedActor {
+public class Buscador extends UntypedActor {
 	public enum Mensaje {
-		CREAR_ESPADA, MATERIALES
+		
 	}
 
-	private static final Logger log = LoggerFactory.getLogger(Herrero.class);
+	private static final Logger log = LoggerFactory.getLogger(Buscador.class);
 	private ArrayList<ActorRef> espadachines;
-	private final HerreroService herreroService;
+	private final BuscadorService buscadorService;
+	
 	
 	
 
 	@Inject
-	public Herrero(HerreroService herreroService) {
-		this.herreroService = herreroService;
+	public Buscador(BuscadorService herreroService) {
+		this.buscadorService = herreroService;
 	}
 
 	@Override
 	public void preStart() {
-		espadachines = new ArrayList<>();
+		//espadachines = new ArrayList<>();
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onReceive(Object message) throws InterruptedException {
-		log.info("[Herrero] ha recibido el mensaje: \"{}\".", message);
+		log.info("[Buscador] ha recibido el mensaje: \"{}\".", message);
 		LibroDTO libro = (LibroDTO) message;
-		List<Libro> lstLibros = herreroService.obtenerListaLibrosBynombre(libro.getNombreLibro());
+		List<Libro> lstLibros = buscadorService.obtenerListaLibrosBynombre(libro.getNombreLibro());
 		libro.setListLibros(lstLibros);
-		List<Libro> listLibrosRecomendados = herreroService.obtenerListaLibrosRecomendados(libro.getListLibros(), libro.getNombreLibro());
+		List<Libro> listLibrosRecomendados = buscadorService.obtenerListaLibrosRecomendados(libro.getListLibros(), libro.getNombreLibro());
 		libro.setListLibrosRecomendados(listLibrosRecomendados);
 		if(!ObjectUtils.isEmpty(lstLibros)) {
-			AgentFactory.espadachin.tell(libro, getSelf());
+			AgentFactory.recomendador.tell(libro, getSelf());
 		} else {
 			unhandled(message);
 		}

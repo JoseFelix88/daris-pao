@@ -19,7 +19,7 @@ public class LibroServiceImpl implements LibroService {
 	@Autowired 
 	private LibroRepository libroRepository; 
 	
-	private static final long TIEMPO_CREACION_ESPADA = 3000;
+	private static final long TIEMPO_BUSQUEDA = 3000;
 	
 	@Override
 	public List<Libro> listarLibros() {
@@ -30,7 +30,7 @@ public class LibroServiceImpl implements LibroService {
 	public LibroDTO obtenerLibrosByNombre(String nombreLibro) {
 		LibroDTO libroDto = new LibroDTO();
 		libroDto.setNombreLibro(nombreLibro);
-		AgentFactory.espadachin.tell(libroDto, ActorRef.noSender());
+		AgentFactory.recomendador.tell(libroDto, ActorRef.noSender());
 		try {
 			crearEspada();
 		} catch (InterruptedException e) {
@@ -40,7 +40,7 @@ public class LibroServiceImpl implements LibroService {
 	}
 	
 	public void crearEspada() throws InterruptedException {
-		Thread.sleep(TIEMPO_CREACION_ESPADA);
+		Thread.sleep(TIEMPO_BUSQUEDA);
 	}
 
 

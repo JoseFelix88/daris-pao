@@ -6,24 +6,24 @@
 
 <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/navbar-static/">
 
-    Bootstrap core CSS
+
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-		
-	Custom styles for this template
+
     	<link href="csspriv/navbar-top.css" rel="stylesheet">
     	<link href="csspriv/style.css" rel="stylesheet">
     	
 <title>Chat Boot Pao</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/navbar-static/">
+<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/navbar-static/">
 
-    Bootstrap core CSS
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-    Custom styles for this template
-    <link href="navbar-top.css" rel="stylesheet">
-    <link href="csspriv/style.css" rel="stylesheet">
-    <link href="csspriv/chat.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+		<script th:src="@{/js/jquery/3.3.1/jquery.min.js}"></script>	
+		<script th:src="@{/js/consultaLibro.js}"></script>	
+	<!-- Custom styles for this template -->
+    	<link href="csspriv/navbar-top.css" rel="stylesheet">
+    	<link href="csspriv/style.css" rel="stylesheet">
+  		 <link href="csspriv/chat.css" rel="stylesheet">
 
   </head>
   <body>
@@ -45,7 +45,7 @@
       
     </ul>
     <form class="form-inline mt-2 mt-md-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Registrarse</button>
+
     </form>
   </div>
 </nav>
@@ -99,7 +99,8 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-  /* (function () {
+
+  (function () {
      var Message;
      Message = function (arg) {
          this.text = arg.text, this.message_side = arg.message_side;
@@ -147,15 +148,9 @@
                  return sendMessage(getMessageText());
              }
          });
-         sendMessage('Hello Philip! :)');
-         setTimeout(function () {
-             return sendMessage('Hi Sandy! How are you?');
-         }, 1000);
-         return setTimeout(function () {
-             return sendMessage('I\'m fine, thank you!');
-         }, 2000);
      });
- }.call(this));*/
+ }.call(this));
+ 
 </script>
     </div>
 

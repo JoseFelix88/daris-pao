@@ -11,7 +11,7 @@ import com.chat.bot.pao.model.Libro;
 import com.chat.bot.pao.repository.LibroRepository;
 
 @Service
-public class HerreroService {
+public class BuscadorService {
 	private static final long TIEMPO_CREACION_ESPADA = 2000;
 
 	@Autowired

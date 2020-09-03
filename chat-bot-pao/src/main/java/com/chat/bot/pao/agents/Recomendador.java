@@ -16,9 +16,9 @@ import com.chat.bot.pao.model.dto.LibroDTO;
 import akka.actor.UntypedActor;
 
 @SuppressWarnings("deprecation")
-@Named("espadachin")
+@Named("recomendador")
 @Scope("prototype")
-public class Espadachin extends UntypedActor {
+public class Recomendador extends UntypedActor {
 
 	private List<Libro> listLibros;
 
@@ -35,15 +35,15 @@ public class Espadachin extends UntypedActor {
         ESPADA_ROTA;
     }
 
-    private static final Logger log = LoggerFactory.getLogger(Espadachin.class);
+    private static final Logger log = LoggerFactory.getLogger(Recomendador.class);
 
     @Override
     public void onReceive(Object o) {
-        log.info("[Espadachin] ha recibido el mensaje: \"{}\".", o);
+        log.info("[Recomendador] ha recibido el mensaje: \"{}\".", o);
         LibroDTO libro = (LibroDTO) o;
         
         if(ObjectUtils.isEmpty(libro.getListLibros())) {
-        	AgentFactory.herrero.tell(libro, getSelf());
+        	AgentFactory.buscador.tell(libro, getSelf());
         } else if(!ObjectUtils.isEmpty(libro.getListLibros())) {
 //        	getContext().stop(getSelf());
         	this.setListLibros(libro.getListLibros());

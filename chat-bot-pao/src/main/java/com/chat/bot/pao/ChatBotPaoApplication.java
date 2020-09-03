@@ -16,7 +16,7 @@ import org.thymeleaf.spring5.view.ThymeleafView;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import com.chat.bot.pao.agents.Espadachin;
+import com.chat.bot.pao.agents.Recomendador;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
