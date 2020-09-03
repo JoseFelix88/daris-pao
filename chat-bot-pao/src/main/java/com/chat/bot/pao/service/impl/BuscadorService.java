@@ -12,13 +12,13 @@ import com.chat.bot.pao.repository.LibroRepository;
 
 @Service
 public class BuscadorService {
-	private static final long TIEMPO_CREACION_ESPADA = 2000;
+
 
 	@Autowired
 	private LibroRepository libroRepository;
 
 	public void crearEspada() throws InterruptedException {
-		Thread.sleep(TIEMPO_CREACION_ESPADA);
+
 	}
 
 	public List<Libro> obtenerListaLibrosBynombre(String nombreLibro) {

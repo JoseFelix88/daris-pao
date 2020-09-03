@@ -16,7 +16,7 @@ public class AgentFactory {
 	
 	public static ActorRef recomendador;
 	public static ActorRef buscador;
-	public static ActorRef minero;
+	public static ActorRef bot;
 	
 	@Autowired
     private ApplicationContext context;
@@ -28,13 +28,13 @@ public class AgentFactory {
 				"recomendador");
 		buscador = actorSystem.actorOf(SpringExtension.SPRING_EXTENSION_PROVIDER.get(actorSystem).props("buscador"),
 				"buscador");
-		minero = actorSystem.actorOf(SpringExtension.SPRING_EXTENSION_PROVIDER.get(actorSystem).props("minero"),
-				"minero");
+		bot = actorSystem.actorOf(SpringExtension.SPRING_EXTENSION_PROVIDER.get(actorSystem).props("bot"),
+				"bot");
 	}
 
 	public boolean existsAgent() {
 		return !ObjectUtils.isEmpty(recomendador) && 
 				!ObjectUtils.isEmpty(buscador) && 
-				!ObjectUtils.isEmpty(minero);
+				!ObjectUtils.isEmpty(bot);
 	}
 }

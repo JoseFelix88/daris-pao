@@ -27,7 +27,7 @@ public class Buscador extends UntypedActor {
 	}
 
 	private static final Logger log = LoggerFactory.getLogger(Buscador.class);
-	private ArrayList<ActorRef> espadachines;
+	private ArrayList<ActorRef> buscador;
 	private final BuscadorService buscadorService;
 	
 	
@@ -40,7 +40,6 @@ public class Buscador extends UntypedActor {
 
 	@Override
 	public void preStart() {
-		//espadachines = new ArrayList<>();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -57,20 +56,6 @@ public class Buscador extends UntypedActor {
 		} else {
 			unhandled(message);
 		}
-		/*if (o == Mensaje.CREAR_ESPADA) {
-			espadachines.add(getSender());
-			AgentFactory.minero.tell(Minero.Mensaje.OBTENER_MATERIALES, getSelf());
-		} else if (o == Mensaje.MATERIALES) {
-			log.info("[Herrero] está creando espada...");
-			herreroService.crearEspada();
-			log.info("[Herrero] ha creado espada.");
-			if (!espadachines.isEmpty()) {
-				espadachines.get(0).tell(Espadachin.Mensaje.ESPADA_NUEVA, getSelf());
-				espadachines.remove(0);
-			}
-		} else {
-			unhandled(o);
-		}*/
 	}
 
 }

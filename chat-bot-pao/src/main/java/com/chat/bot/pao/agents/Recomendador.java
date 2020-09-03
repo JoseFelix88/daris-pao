@@ -31,8 +31,7 @@ public class Recomendador extends UntypedActor {
 	}
 
 	public enum Mensaje {
-        ESPADA_NUEVA,
-        ESPADA_ROTA;
+
     }
 
     private static final Logger log = LoggerFactory.getLogger(Recomendador.class);
