@@ -2,7 +2,6 @@ package com.chat.bot.pao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -15,11 +14,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafView;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-
-import com.chat.bot.pao.agents.Recomendador;
-
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
 
 @Configuration
 @SpringBootApplication
