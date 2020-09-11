@@ -2,7 +2,9 @@ package com.chat.bot.pao.model.dto;
 
 import java.io.Serializable;
 
+import lombok.Data;
 
+@Data
 public class ChatDTO implements Serializable {
 
 	/**
@@ -14,20 +16,5 @@ public class ChatDTO implements Serializable {
 	
 	private String respuesta;
 	
-	public String getSolicitud() {
-		return solicitud;
-	}
-
-	public void setSolicitud(String solicitud) {
-		this.solicitud = solicitud;
-	}
-
-	public String getRespuesta() {
-		return respuesta;
-	}
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
-	}
 	
 }

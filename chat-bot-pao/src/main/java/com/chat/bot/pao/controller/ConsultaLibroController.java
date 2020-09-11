@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.chat.bot.pao.agents.util.AgentFactory;
 import com.chat.bot.pao.model.Libro;
+import com.chat.bot.pao.model.dto.ChatDTO;
 import com.chat.bot.pao.model.dto.LibroDTO;
 import com.chat.bot.pao.service.LibroService;
+import com.chat.bot.pao.service.impl.ChatService;
 
 @Controller
 public class ConsultaLibroController implements Serializable {
@@ -35,6 +37,9 @@ public class ConsultaLibroController implements Serializable {
 
 	@Autowired
 	private LibroService libroService;
+	
+	@Autowired 
+	private ChatService chatService;
 
 	List<Libro> LIST_LIBROS = new ArrayList();
 
@@ -59,22 +64,26 @@ public class ConsultaLibroController implements Serializable {
 
 	@GetMapping("/chatbot/index/")
 	public String cargarChat(HttpServletRequest request, Model model) {
-		StringBuilder mensajeChat = new StringBuilder();;
-		if(!ObjectUtils.isEmpty(LIST_LIBROS)) {
-			mensajeChat.append( "Hola, espero estes bien, he encontrado el siguiente listado de libros: \n");
-			LIST_LIBROS.forEach(libro ->{
-				mensajeChat.append(libro.getNombreLibro());	
-				if(LIST_LIBROS.size() > 1) {
+		StringBuilder mensajeChat = new StringBuilder();
+		if (!ObjectUtils.isEmpty(LIST_LIBROS)) {
+			ChatDTO chat = new ChatDTO();
+			chat.setSolicitud("hola");
+			log.info(chatService.getResponse(chat));
+			mensajeChat.append("Hola, espero estes bien, he encontrado el siguiente listado de libros: \n");
+			LIST_LIBROS.forEach(libro -> {
+				mensajeChat.append(libro.getNombreLibro());
+				if (LIST_LIBROS.size() > 1) {
 					mensajeChat.append(",");
-				}else {
+				} else {
 					mensajeChat.append("\t\t");
 				}
 			});
 		} else {
-			mensajeChat.append("Hola, espero estes bien, lo lamento no he podido encontrar alguna conincidencia exacta con tu busqueda. " );
+			mensajeChat.append(
+					"Hola, espero estes bien, lo lamento no he podido encontrar alguna conincidencia exacta con tu busqueda. ");
 		}
 
-		if(!ObjectUtils.isEmpty(LIST_LIBROS_RECOMENDADOS)) {
+		if (!ObjectUtils.isEmpty(LIST_LIBROS_RECOMENDADOS)) {
 			mensajeChat.append("\nTe suguiero revises el listado de recomendaciones.");
 		}
 		log.info(mensajeChat.toString());

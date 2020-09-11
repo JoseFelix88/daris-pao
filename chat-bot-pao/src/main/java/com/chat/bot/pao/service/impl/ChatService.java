@@ -1,6 +1,7 @@
 package com.chat.bot.pao.service.impl;
 
 import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,12 @@ public class ChatService {
 
 	public String getResponse(ChatDTO chatDto) {
 		log.info("[Obteniendo respuesta al chat - Inicio]");
-		
-		return "";
+		KieSession kieSession = kieContainer.newKieSession();
+        kieSession.setGlobal("chat", chatDto);
+        kieSession.insert(chatDto);
+        kieSession.fireAllRules();
+        kieSession.dispose();
+        return chatDto.getRespuesta();
 	}
 	
 	

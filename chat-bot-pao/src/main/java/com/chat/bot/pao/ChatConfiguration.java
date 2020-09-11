@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.chat.bot.pao.service")
 public class ChatConfiguration {
 
-	private static final String drlFile = "TAXI_FARE_RULE.drl";
+	private static final String drlFile = "CHAT_BOT_RULE.drl";
 	 
     @Bean
     public KieContainer kieContainer() {

@@ -1,0 +1,16 @@
+package rules
+
+
+import com.chat.bot.pao.model.dto.ChatDTO; 
+
+
+global com.chat.bot.pao.model.dto.ChatDTO chat
+
+rule "Your First Rule"
+
+    when
+        chatInstance:ChatDTO(solicitud == "hola");
+        
+    then
+		chat.setRespuesta("Hola te respondo desde drools...");
+end
