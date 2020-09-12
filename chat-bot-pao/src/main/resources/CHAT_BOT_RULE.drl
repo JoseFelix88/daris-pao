@@ -50,7 +50,7 @@ rule "conversation3"
         
     then
 		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
-
+	end	
 
     when
         chatInstance:ChatDTO(solicitud == "si");
@@ -58,7 +58,9 @@ rule "conversation3"
     then
 		chat.setRespuesta("Que autor es tu favorito");
 	
- when
+ 	end	
+ 	
+ 	when
         chatInstance:ChatDTO(solicitud == "nombre autor);
         
     then
