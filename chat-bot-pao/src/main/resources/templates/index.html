@@ -12,8 +12,8 @@
 		<script th:src="@{/js/jquery/3.3.1/jquery.min.js}"></script>	
 		<script th:src="@{/js/consultaLibro.js}"></script>	
 	<!-- Custom styles for this template -->
-    	<link href="csspriv/navbar-top.css" rel="stylesheet">
-    	<link href="csspriv/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/navbar-top.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     	
 <title>Chat Boot Pao</title>
 
@@ -43,15 +43,18 @@
 </nav>
 		
  <div class="container">
-   <div class="input-group mb-3">
+   <div class="mb-3  w-100">
 		<form id="formConsultaLibro" th:action="@{/consulta/libro}" method="get">
-		  <input type="text" class="form-control" placeholder="Consultar libros" aria-label="Recipient's username" aria-describedby="button-addon2"
-			 id="textSearch">
-			  <div class="input-group-append">
-			    <button class="btn btn-success" type="button" onclick="consultarLibro()" id="button-addon2">Buscar</button>
-			  </div>
+		  <div class="row">
+		  <div class="col">
+			  <input type="text" class="form-control" placeholder="Consultar libros" id="textSearch">
+		  </div>
+		  <div class="col input-group-append">
+		    <button class="btn btn-success" type="button" onclick="consultarLibro()" id="button-addon2">Buscar</button>
+		  </div>
+		  </div>
 		</form>
-</div>
+	</div>
 </div>
 
 
