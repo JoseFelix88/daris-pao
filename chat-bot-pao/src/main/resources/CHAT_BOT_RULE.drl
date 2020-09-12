@@ -12,5 +12,72 @@ rule "Your First Rule"
         chatInstance:ChatDTO(solicitud == "hola");
         
     then
-		chat.setRespuesta("Hola te respondo desde drools...");
+		chat.setRespuesta("Hola mi nombre es books. ¿Como te llamas?");
 end
+
+rule "nombre"
+
+    when
+        chatInstance:ChatDTO(solicitud == "nombre");
+        
+    then
+		chat.setRespuesta("Mucho gusto diana, que deseas buscar");
+end
+
+rule "conversation1"
+
+    when
+        chatInstance:ChatDTO(solicitud == "libros");
+        
+    then
+		chat.setRespuesta("Que tipo de libros buscas");
+end
+
+// jose aqui es donde tengo la duda como hago bien como hago reglas dentro de una regla principal
+rule "conversation2"
+
+    when
+        chatInstance:ChatDTO(solicitud == "libros de ciencia ficción");
+        
+    then
+		chat.setRespuesta("Tienes preferencia por algún autor");
+end
+
+rule "conversation3"
+
+    when
+        chatInstance:ChatDTO(solicitud == "no");
+        
+    then
+		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
+	end	
+
+    when
+        chatInstance:ChatDTO(solicitud == "si");
+        
+    then
+		chat.setRespuesta("Que autor es tu favorito");
+	
+ 	end	
+ 	
+ 	when
+        chatInstance:ChatDTO(solicitud == "nombre autor);
+        
+    then
+		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
+
+	end	
+	
+		
+rule "GoodBye"
+	
+	when
+		solicitud : ConversationData( status == ConversationData.ADIOS )
+	then
+		solicitud.setMessage( "Gracias por usar nuestro servicio, desea algo mas!");
+end
+		
+
+
+
+
