@@ -13,7 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chat.bot.pao.agents.util.AgentFactory;
 import com.chat.bot.pao.model.Libro;
@@ -51,7 +55,7 @@ public class ConsultaLibroController implements Serializable {
 	}
 
 	@GetMapping("/consulta/libro/{textSearch}")
-	public String consultarLibro(@PathVariable("textSearch") String textSearch, HttpServletRequest request) {
+	public String consultarLibro(@PathVariable("textSearch") String textSearch,Model model, HttpServletRequest request) {
 		log.info("Search: " + textSearch);
 		if (!agentFactory.existsAgent()) {
 			agentFactory.initAgent();
@@ -59,6 +63,7 @@ public class ConsultaLibroController implements Serializable {
 		LibroDTO libroDTO = libroService.obtenerLibrosByNombre(textSearch);
 		LIST_LIBROS = libroDTO.getListLibros();
 		LIST_LIBROS_RECOMENDADOS = libroDTO.getListLibrosRecomendados();
+		model.addAttribute("chatDto", new ChatDTO());
 		return "consultar";
 	}
 
@@ -66,9 +71,6 @@ public class ConsultaLibroController implements Serializable {
 	public String cargarChat(HttpServletRequest request, Model model) {
 		StringBuilder mensajeChat = new StringBuilder();
 		if (!ObjectUtils.isEmpty(LIST_LIBROS)) {
-			ChatDTO chat = new ChatDTO();
-			chat.setSolicitud("hola");
-			log.info(chatService.getResponse(chat));
 			mensajeChat.append("Hola, espero estes bien, he encontrado el siguiente listado de libros: \n");
 			LIST_LIBROS.forEach(libro -> {
 				mensajeChat.append(libro.getNombreLibro());
@@ -88,8 +90,16 @@ public class ConsultaLibroController implements Serializable {
 		}
 		log.info(mensajeChat.toString());
 		model.addAttribute("lstLibros", LIST_LIBROS_RECOMENDADOS);
-		model.addAttribute("mensajeChat", mensajeChat.toString());
+		model.addAttribute("chatDto", new ChatDTO());
 		return "consultar";
+	}
+	
+	
+	@RequestMapping(value = "/chat",  method=RequestMethod.POST,  produces = "application/json")
+	@ResponseBody
+	public String chat(@ModelAttribute("chatDto") ChatDTO chatDto) {
+		chatService.getResponse(chatDto);
+		return "{\"success\":"+chatDto.getRespuesta()+"}";
 	}
 
 }

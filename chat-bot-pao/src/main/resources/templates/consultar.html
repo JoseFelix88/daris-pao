@@ -31,11 +31,10 @@
       </li>
       
     </ul>
-    <form class="form-inline mt-2 mt-md-0">
-
-    </form>
+    
   </div>
 </nav>
+<!--
 <div class="container-sm">
      <div class="input-group mb-3">
   <input type="text" class="form-control" placeholder="Consultar libros" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -43,12 +42,13 @@
     <button class="btn btn-success" type="button" id="button-addon2">Buscar</button>
   </div>
 </div>
-</div>
+</div> -->
 
 <div class="container">
-  <div class="row">
+<form  id="formchat" th:object="${chatDto}">
+
+  <div class="row" >
     <div class="col">
-      CONSULTA
       <div class="chat_window">
     <div class="top_menu">
         <div class="buttons">
@@ -59,12 +59,10 @@
         <div class="title">Chat</div>
     </div>
     <ul class="messages"></ul>
-    <div th:text="*{mensajeChat}" ></div>
+    <div></div>
     <div class="bottom_wrapper clearfix">
         <div class="message_input_wrapper">
-        	
-        	
-            <input class="message_input" placeholder="Type your message here..." />
+            <input class="message_input" placeholder="Type your message here..." th:field="*{solicitud}"/>
         </div>
         <div class="send_message">
             <div class="icon"></div>
@@ -73,20 +71,24 @@
     </div>
 </div>
 <div class="message_template">
-    <li class="message">
+    <div class="message">
         <div class="avatar"></div>
         <div class="text_wrapper">
-            <div class="text"></div>
+            <div class="text" id="textoChat"></div>
         </div>
-    </li>
+    </div>
 </div>
 </div>
 </div>
+</form>
+<input type="hidden" th:value="*{respuesta}" id="inputMessageChat">
 </div>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
+$( document ).ready(function() {
+	
+	
   (function () {
      var Message;
      Message = function (arg) {
@@ -106,10 +108,26 @@
      };
      $(function () {
          var getMessageText, message_side, sendMessage;
-        message_side = 'right';
-         getMessageText = function () {
+        	message_side = 'right';
+         	getMessageText = function () {
              var $message_input;
              $message_input = $('.message_input');
+         	var parametro = $("#formchat").serialize();
+	         $.ajax({
+        		type : 'POST',
+        		url : '/dairis/chat',
+        		data : parametro,
+        		success : function(data) {
+        			var o = JSON.parse(data.success);
+        			console.log('holaaaaaaaa....'+o.success);
+        		},
+        		error : function(data){
+        			var informacionError = data.responseText;
+        			var jsonResponse = JSON.parse(informacionError);
+        		}
+	        });
+             
+             
              return $message_input.val();
          };
          sendMessage = function (text) {
@@ -137,7 +155,7 @@
          });
      });
  }.call(this));
- 
+});
 </script>
     </div>
 
