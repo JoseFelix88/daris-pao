@@ -33,7 +33,6 @@ rule "conversation1"
 		chat.setRespuesta("Que tipo de libros buscas");
 end
 
-// jose aqui es donde tengo la duda como hago bien como hago reglas dentro de una regla principal
 rule "conversation2"
 
     when
@@ -50,32 +49,22 @@ rule "conversation3"
         
     then
 		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
-	end	
+end	
 
+rule "conversation4"
     when
         chatInstance:ChatDTO(solicitud == "si");
         
     then
 		chat.setRespuesta("Que autor es tu favorito");
 	
- 	end	
- 	
+end	
+
+rule "conversation5" 	
  	when
-        chatInstance:ChatDTO(solicitud == "nombre autor);
+        chatInstance:ChatDTO(solicitud == "nombre autor");
         
     then
 		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
 
-	end	
-	
-		
-rule "GoodBye"
-	
-	when
-		solicitud : ConversationData( status == ConversationData.ADIOS )
-	then
-		solicitud.setMessage( "Gracias por usar nuestro servicio, desea algo mas!");
-end
-		
-
-
+end	
