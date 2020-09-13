@@ -11,6 +11,8 @@ public class LibroDTO {
 	private List<Libro> listLibros;
 	
 	private List<Libro> listLibrosRecomendados;
+	
+	
 
 
 	public String getNombreLibro() {

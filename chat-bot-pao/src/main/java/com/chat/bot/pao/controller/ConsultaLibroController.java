@@ -105,4 +105,10 @@ public class ConsultaLibroController implements Serializable {
 		return "consultar :: fragment";
 	}
 
+	@RequestMapping(value = "/consultar/historial")
+	public String consultarHistorial(Model model) {
+		model.addAttribute("listHistorial", libroService.obtenerListadoHistorico());
+		return "historicobusqueda";
+	}
+	
 }
