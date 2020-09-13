@@ -18,25 +18,34 @@ end
 rule "nombre"
 
     when
-        chatInstance:ChatDTO(solicitud == "nombre");
+        chatInstance:ChatDTO(solicitud == "paola"||solicitud == "andrea"||solicitud == "julian"||solicitud == "sofia"||solicitud == "alberto"||solicitud == "ruben"
+        ||solicitud == "raul"||solicitud == "damian"||solicitud == "domenico"||solicitud == "hermen"||solicitud == "jose"||solicitud == "josé"||solicitud == "ricardo"
+        ||solicitud == "adonis"||solicitud == "leandro"||solicitud == "leonardo"||solicitud == "francisco"||solicitud == "ana"||solicitud == "maria"||solicitud == "camila"
+        ||solicitud == "veronica"||solicitud == "sandra"||solicitud == "johana"||solicitud == "ruben"||solicitud == "Ruben"||solicitud == "elisabeth"||solicitud == "elizabeth"||solicitud == "eliza"
+        ||solicitud == "valentina"||solicitud == "lucas"||solicitud == "damaso"||solicitud == "hermenegildo"||solicitud == "daniela"||solicitud == "laura"||solicitud == "enrique");
         
     then
-		chat.setRespuesta("Mucho gusto diana, que deseas buscar");
+		chat.setRespuesta("Mucho gusto, que deseas buscar");
 end
 
 rule "conversation1"
 
     when
-        chatInstance:ChatDTO(solicitud == "libros");
+        chatInstance:ChatDTO(solicitud == "libros" || solicitud == "libro");
         
     then
-		chat.setRespuesta("Que tipo de libros buscas");
+		chat.setRespuesta("Que tipo libro o libros buscas");
 end
 
 rule "conversation2"
 
     when
-        chatInstance:ChatDTO(solicitud == "libros de ciencia ficción");
+        chatInstance:ChatDTO(solicitud == "libros de ciencia ficción"||solicitud == "ficción"||solicitud == "ciencia"||solicitud == "romance"||solicitud == "historicos"||solicitud == "historia"
+         ||solicitud == "ciencia ficcion"||solicitud == "romantica" || solicitud == "drama" || solicitud == "libros dramaticos" || solicitud == "libros educativos"
+         ||solicitud == "educación" || solicitud == "educacion" || solicitud == "sistemas" || solicitud == "informatica"
+         ||solicitud == "novelas de drama" || solicitud == "poesia" || solicitud == "cuentos infantiles" || solicitud == "infantiles"
+         ||solicitud == "politicos" || solicitud == "libros sobre politica" || solicitud == "eroticos" || solicitud == "libros eroticos"||solicitud == "libros");
+         
         
     then
 		chat.setRespuesta("Tienes preferencia por algún autor");
@@ -48,7 +57,7 @@ rule "conversation3"
         chatInstance:ChatDTO(solicitud == "no");
         
     then
-		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
+		chat.setRespuesta("Puedes visualizar una lista de libros de acuerdo a tu solicitud");
 end	
 
 rule "conversation4"
@@ -65,6 +74,6 @@ rule "conversation5"
         chatInstance:ChatDTO(solicitud == "nombre autor");
         
     then
-		chat.setRespuesta("Puedes visualizar una lista de libros a la derecha de acuerdo a tu solicitud");
+		chat.setRespuesta("Puedes visualizar una lista de libros de acuerdo a tu solicitud");
 
 end	
