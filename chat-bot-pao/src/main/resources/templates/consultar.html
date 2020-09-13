@@ -62,7 +62,7 @@
     <div></div>
     <div class="bottom_wrapper clearfix">
         <div class="message_input_wrapper">
-            <input class="message_input" placeholder="Type your message here..." th:field="*{solicitud}"/>
+            <input class="message_input" placeholder="Escribeme aqui..." th:field="*{solicitud}"/>
         </div>
         <div class="send_message">
             <div class="icon"></div>
@@ -81,7 +81,9 @@
 </div>
 </div>
 </form>
-<input type="hidden" th:value="*{respuesta}" id="inputMessageChat">
+<div th:fragment="fragment" id="fragment">
+	<input type="hidden" th:value="*{respuesta}" id="inputMessageChat">
+</div>
 </div>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -112,32 +114,50 @@ $( document ).ready(function() {
          	getMessageText = function () {
              var $message_input;
              $message_input = $('.message_input');
-         	var parametro = $("#formchat").serialize();
+            var  $messages = $('.messages');
+             var parametro = $("#formchat").serialize();
 	         $.ajax({
         		type : 'POST',
         		url : '/dairis/chat',
         		data : parametro,
         		success : function(data) {
-        			var o = JSON.parse(data.success);
-        			console.log('holaaaaaaaa....'+o.success);
+        			$('#fragment').replaceWith(data);
+        			 message = new Message({
+                         text: $message_input.val(),
+                         message_side: message_side
+                     });
+        			$messages.innerHTML = '<div>'+$message_input.val()+'</div>';
+        			message.draw();
+        			console.log($message_input.val());
+        			if($('#inputMessageChat').val() != '') {
+        				message_side = 'left';
+        				$message_input = $('#inputMessageChat');
+        				 message = new Message({
+                             text: $message_input.val(),
+                             message_side: message_side
+                         });
+	        			$messages.innerHTML = '<div>'+$message_input.val()+'</div>';
+	        			 message.draw();
+	        			$('#inputMessageChat').val('');
+        			}
+        			console.log($message_input.val());
+        				message_side = 'right';
+                     return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
         		},
         		error : function(data){
         			var informacionError = data.responseText;
         			var jsonResponse = JSON.parse(informacionError);
         		}
 	        });
-             
-             
-             return $message_input.val();
          };
          sendMessage = function (text) {
              var $messages, message;
-             if (text.trim() === '') {
+             if (text === '') {
                  return;
              }
              $('.message_input').val('');
              $messages = $('.messages');
-             message_side = message_side === 'left' ? 'right' : 'left';
+//              message_side = message_side === 'left' ? 'right' : 'left';
              message = new Message({
                  text: text,
                  message_side: message_side
@@ -146,20 +166,18 @@ $( document ).ready(function() {
              return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
          };
          $('.send_message').click(function (e) {
-             return sendMessage(getMessageText());
+//              return sendMessage(getMessageText());
+             return getMessageText();
          });
-         $('.message_input').keyup(function (e) {
+         /*$('.message_input').keyup(function (e) {
              if (e.which === 13) {
                  return sendMessage(getMessageText());
              }
-         });
+         });*/
      });
  }.call(this));
 });
 </script>
-    </div>
-
-    
     <div class="col">
       LISTADO DE RECOMENDACIONES
       <table class="table">

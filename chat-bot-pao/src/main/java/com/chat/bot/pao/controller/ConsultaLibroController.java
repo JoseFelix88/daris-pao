@@ -95,11 +95,10 @@ public class ConsultaLibroController implements Serializable {
 	}
 	
 	
-	@RequestMapping(value = "/chat",  method=RequestMethod.POST,  produces = "application/json")
-	@ResponseBody
-	public String chat(@ModelAttribute("chatDto") ChatDTO chatDto) {
-		chatService.getResponse(chatDto);
-		return "{\"success\":"+chatDto.getRespuesta()+"}";
+	@RequestMapping(value = "/chat")
+	public String chat(@ModelAttribute("chatDto") ChatDTO chatDto, Model model) {
+		model.addAttribute("respuesta",chatService.getResponse(chatDto));
+		return "consultar :: fragment";
 	}
 
 }
