@@ -66,7 +66,7 @@
         </div>
         <div class="send_message">
             <div class="icon"></div>
-            <div class="text">Send</div>
+            <div class="text">Enviar</div>
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
     <div class="message">
         <div class="avatar"></div>
         <div class="text_wrapper">
-            <div class="text" id="textoChat"></div>
+            <div class="text"></div>
         </div>
     </div>
 </div>
@@ -115,6 +115,7 @@ $( document ).ready(function() {
              var $message_input;
              $message_input = $('.message_input');
             var  $messages = $('.messages');
+            var message_usuario, message_bot;
              var parametro = $("#formchat").serialize();
 	         $.ajax({
         		type : 'POST',
@@ -122,48 +123,31 @@ $( document ).ready(function() {
         		data : parametro,
         		success : function(data) {
         			$('#fragment').replaceWith(data);
-        			 message = new Message({
+        			message_usuario = new Message({
                          text: $message_input.val(),
-                         message_side: message_side
+                         message_side: 'right'
                      });
         			$messages.innerHTML = '<div>'+$message_input.val()+'</div>';
-        			message.draw();
+        			message_usuario.draw();
         			console.log($message_input.val());
-        			if($('#inputMessageChat').val() != '') {
-        				message_side = 'left';
-        				$message_input = $('#inputMessageChat');
-        				 message = new Message({
-                             text: $message_input.val(),
-                             message_side: message_side
+        			var mensaje_bot = $('#inputMessageChat').val();
+        			if(mensaje_bot != '') {
+        				message_bot = new Message({
+                             text: mensaje_bot,
+                             message_side: 'left'
                          });
-	        			$messages.innerHTML = '<div>'+$message_input.val()+'</div>';
-	        			 message.draw();
-	        			$('#inputMessageChat').val('');
-        			}
-        			console.log($message_input.val());
-        				message_side = 'right';
-                     return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
+	        			$messages.innerHTML = '<div>'+mensaje_bot+'</div>';
+	        			message_bot.draw();
+        				console.log(mensaje_bot);
+        			}	
+	        		$('.message_input').val('');
+	        		$messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
         		},
         		error : function(data){
         			var informacionError = data.responseText;
         			var jsonResponse = JSON.parse(informacionError);
         		}
 	        });
-         };
-         sendMessage = function (text) {
-             var $messages, message;
-             if (text === '') {
-                 return;
-             }
-             $('.message_input').val('');
-             $messages = $('.messages');
-//              message_side = message_side === 'left' ? 'right' : 'left';
-             message = new Message({
-                 text: text,
-                 message_side: message_side
-             });
-             message.draw();
-             return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
          };
          $('.send_message').click(function (e) {
 //              return sendMessage(getMessageText());
