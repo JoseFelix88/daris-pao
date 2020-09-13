@@ -101,7 +101,10 @@ $( document ).ready(function() {
 		   }
 		 });
 	
+	
   (function () {
+	  console.log('sssssssssssssssssssssss')
+	  
      var Message;
      Message = function (arg) {
          this.text = arg.text, this.message_side = arg.message_side;
@@ -118,6 +121,19 @@ $( document ).ready(function() {
          }(this);
          return this;
      };
+     var mensaje_bot = $('#inputMessageChat').val();
+	 	var $messages = $('.messages');
+	    var message_bot;
+		if(mensaje_bot != '') {
+			message_bot = new Message({
+	             text: mensaje_bot,
+	             message_side: 'left'
+	         });
+			$messages.innerHTML = '<div>'+ mensaje_bot +'</div>';
+			message_bot.draw();
+			console.log(mensaje_bot);
+			$messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
+		}
      $(function () {
          var getMessageText, message_side, sendMessage;
         	message_side = 'right';
@@ -133,11 +149,12 @@ $( document ).ready(function() {
         		data : parametro,
         		success : function(data) {
         			$('#fragment').replaceWith(data);
+        			var mensaje_usuario = $message_input.val();
         			message_usuario = new Message({
-                         text: $message_input.val(),
+                         text: mensaje_usuario,
                          message_side: 'right'
                      });
-        			$messages.innerHTML = '<div>'+$message_input.val()+'</div>';
+        			$messages.innerHTML = '<div>'+ mensaje_usuario +'</div>';
         			message_usuario.draw();
         			console.log($message_input.val());
         			var mensaje_bot = $('#inputMessageChat').val();
@@ -146,12 +163,13 @@ $( document ).ready(function() {
                              text: mensaje_bot,
                              message_side: 'left'
                          });
-	        			$messages.innerHTML = '<div>'+mensaje_bot+'</div>';
+	        			$messages.innerHTML = '<div>'+ mensaje_bot +'</div>';
 	        			message_bot.draw();
         				console.log(mensaje_bot);
         			}	
 	        		$('.message_input').val('');
 	        		$messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
+	        		buscarRecomendaciones(mensaje_usuario);
         		},
         		error : function(data){
         			var informacionError = data.responseText;
@@ -160,19 +178,33 @@ $( document ).ready(function() {
 	        });
          };
          $('.send_message').click(function (e) {
-//              return sendMessage(getMessageText());
              return getMessageText();
          });
-         /*$('.message_input').keyup(function (e) {
-             if (e.which === 13) {
-                 return sendMessage(getMessageText());
-             }
-         });*/
      });
+     function buscarRecomendaciones(mensaje_usuario){
+    	 var parametro = $("#formConsultaLibro").serialize();
+    		var url = '/dairis/consulta/libro';
+    		url = url+ '/'+ mensaje_usuario;
+    		$.ajax({
+    			type : 'GET',
+    			url : url,
+    			data : parametro,
+    			success : function(data) {
+    				console.log(data);
+    				$('#listResult').replaceWith(data);
+    			},
+    			error : function(data){
+    				var informacionError = data.responseText;
+    				var jsonResponse = JSON.parse(informacionError);
+    			}
+    		});
+     }
  }.call(this));
+  
+  
 });
 </script>
-    <div class="col">
+    <div class="col" th:fragment="listResult" id="listResult">
       LISTADO DE RECOMENDACIONES
       <table class="table">
          <thead class="thead-light">

@@ -10,6 +10,7 @@ function consultarLibro() {
 		success : function(data) {
 			console.log(data);
 			location.href = '/dairis/chatbot/index/';
+			$('#listResult').replaceWith(data);
 		},
 		error : function(data){
 			var informacionError = data.responseText;

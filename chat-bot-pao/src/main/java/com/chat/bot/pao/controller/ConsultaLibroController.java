@@ -61,10 +61,13 @@ public class ConsultaLibroController implements Serializable {
 			agentFactory.initAgent();
 		}
 		LibroDTO libroDTO = libroService.obtenerLibrosByNombre(textSearch);
+		if(!ObjectUtils.isEmpty(libroDTO.getListLibrosRecomendados())) {
+			LIST_LIBROS_RECOMENDADOS = libroDTO.getListLibrosRecomendados();
+		}
 		LIST_LIBROS = libroDTO.getListLibros();
-		LIST_LIBROS_RECOMENDADOS = libroDTO.getListLibrosRecomendados();
+		model.addAttribute("lstLibros", LIST_LIBROS_RECOMENDADOS);
 		model.addAttribute("chatDto", new ChatDTO());
-		return "consultar";
+		return "consultar :: listResult";
 	}
 
 	@GetMapping("/chatbot/index/")
@@ -89,6 +92,7 @@ public class ConsultaLibroController implements Serializable {
 			mensajeChat.append("\nTe suguiero revises el listado de recomendaciones.");
 		}
 		log.info(mensajeChat.toString());
+		model.addAttribute("respuesta",mensajeChat.toString());
 		model.addAttribute("lstLibros", LIST_LIBROS_RECOMENDADOS);
 		model.addAttribute("chatDto", new ChatDTO());
 		return "consultar";
