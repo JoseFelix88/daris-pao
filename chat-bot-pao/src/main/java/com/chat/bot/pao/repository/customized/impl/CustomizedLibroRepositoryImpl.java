@@ -60,7 +60,7 @@ public class CustomizedLibroRepositoryImpl implements CustomizedLibroRepository 
 		List<Libro> lstLisbros = query.getResultList();
 		lstLisbros.forEach(libroRecomendado -> {
 			HistorialBusqueda historialBusqueda = new HistorialBusqueda(null, libroRecomendado.getNombreLibro(),
-					libroRecomendado.getAutor(), libroRecomendado.getGenero(), LocalDateTime.now(), null);
+					libroRecomendado.getAutor(), libroRecomendado.getGenero(), LocalDateTime.now(), libroRecomendado.getFoto(), null);
 			guardarHistorialBusqueda(historialBusqueda);
 		});
 		return lstLisbros;
@@ -76,7 +76,7 @@ public class CustomizedLibroRepositoryImpl implements CustomizedLibroRepository 
 		List<Libro> lstLisbros = query.getResultList();
 		lstLisbros.forEach(libro -> {
 			HistorialBusqueda historialBusqueda = new HistorialBusqueda(null, libro.getNombreLibro(), libro.getAutor(),
-					libro.getGenero(), LocalDateTime.now(), null);
+					libro.getGenero(), LocalDateTime.now(),  libro.getFoto(), null);
 			guardarHistorialBusqueda(historialBusqueda);
 		});
 		return lstLisbros;
@@ -91,6 +91,13 @@ public class CustomizedLibroRepositoryImpl implements CustomizedLibroRepository 
 	public List<HistorialBusqueda> obtenerListadoHistorico() {
 		Query query = entityManager.createQuery("from HistorialBusqueda order by codigoHistorial desc")
 				.setMaxResults(10);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<HistorialBusqueda> obtenerListadoRecomendados() {
+		Query query = entityManager.createQuery("from HistorialBusqueda order by codigoHistorial desc")
+				.setMaxResults(5);
 		return query.getResultList();
 	}
 

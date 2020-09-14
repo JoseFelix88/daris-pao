@@ -14,4 +14,6 @@ public interface LibroService {
 	
 	public List<HistorialBusqueda> obtenerListadoHistorico();
 	
+	public List<HistorialBusqueda> obtenerListadoRecomendados();
+	
 }

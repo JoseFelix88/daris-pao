@@ -49,8 +49,9 @@ public class ConsultaLibroController implements Serializable {
 
 	List<Libro> LIST_LIBROS_RECOMENDADOS = new ArrayList();
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String index(Model model) {
+		model.addAttribute("listRecomendados", libroService.obtenerListadoRecomendados());
 		return "index";
 	}
 
