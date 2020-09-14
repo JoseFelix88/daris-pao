@@ -49,7 +49,7 @@ rule "genero"
          
         
     then
-		chat.setRespuesta("Tienes preferencia por algún autor ¿Dime Cual?");
+		chat.setRespuesta("Te muestro una lista de libros de acuerdo a tu información");
 end
 
 rule "preferencia"
