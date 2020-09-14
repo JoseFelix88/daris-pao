@@ -86,7 +86,7 @@ public class ConsultaLibroController implements Serializable {
 			});
 		} else {
 			mensajeChat.append(
-					"Hola, espero estes bien, lo lamento no he podido encontrar alguna conincidencia exacta con tu busqueda. ");
+					"Lo lamento no he  encontrado alguna conincidencia exacta con tu busqueda. ");
 		}
 
 		if (!ObjectUtils.isEmpty(LIST_LIBROS_RECOMENDADOS)) {
