@@ -71,7 +71,13 @@ end
 
 rule "conversation5" 	
  	when
-        chatInstance:ChatDTO(solicitud == "nombre autor");
+        chatInstance:ChatDTO(solicitud == "jk-rouling"||solicitud == "dan brown"
+        ||solicitud == "fernando gamboa"||solicitud == "cristian perfumo"||solicitud == "cristian"
+        ||solicitud == "fernando"||solicitud == "mercedes pinto maldonado	"||solicitud == "mercedes"
+        ||solicitud == "pinto"||solicitud == "maldonado"||solicitud == "jk"
+        ||solicitud == "rouling"||solicitud == "carmen mola"||solicitud == "carmen"
+        ||solicitud == "mola"||solicitud == "susana"||solicitud == "martinez"
+        ||solicitud == "susana martinez"||solicitud == "dan" ||solicitud == "brown");
         
     then
 		chat.setRespuesta("Puedes visualizar una lista de libros de acuerdo a tu solicitud");
