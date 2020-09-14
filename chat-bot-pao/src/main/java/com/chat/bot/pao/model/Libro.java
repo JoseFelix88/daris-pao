@@ -53,6 +53,17 @@ public class Libro implements Serializable {
 	
 	@Column(name = "FECHA_ACTUALIZACION", nullable = false)
 	private LocalDateTime fechaActulizacion;
+	
+	@Column
+	private String foto;
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 	public Integer getIdLibro() {
 		return idLibro;

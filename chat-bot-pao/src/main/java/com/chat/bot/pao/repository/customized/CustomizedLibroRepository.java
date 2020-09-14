@@ -12,4 +12,6 @@ public interface CustomizedLibroRepository {
 	public List<Libro> findLibroRecomendado(String nombreLibro);
 	
 	public List<HistorialBusqueda> obtenerListadoHistorico();
+	
+	public List<HistorialBusqueda> obtenerListadoRecomendados();
 }

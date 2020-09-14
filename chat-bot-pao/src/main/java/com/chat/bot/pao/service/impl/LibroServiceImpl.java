@@ -49,5 +49,10 @@ public class LibroServiceImpl implements LibroService {
 		return libroRepository.obtenerListadoHistorico();
 	}
 
+	@Override
+	public List<HistorialBusqueda> obtenerListadoRecomendados() {
+		return libroRepository.obtenerListadoRecomendados();
+	}
+
 
 }

@@ -46,6 +46,9 @@ public class HistorialBusqueda implements Serializable {
 	@Column
 	private LocalDateTime fechaHoraConsulta;
 	
+	@Column
+	private String foto;
+	
 	@Transient
 	private String fechaHoraConsultaTemp;
 	/**
