@@ -48,24 +48,24 @@ rule "conversation2"
          
         
     then
-		chat.setRespuesta("Tienes preferencia por algún autor");
+		chat.setRespuesta("Tienes preferencia por algún autor ¿Dime Cual?");
 end
 
 rule "conversation3"
 
     when
-        chatInstance:ChatDTO(solicitud == "no");
+        chatInstance:ChatDTO(solicitud == "no" || solicitud == "no tengo preferencia");
         
     then
-		chat.setRespuesta("Puedes visualizar una lista de libros de acuerdo a tu solicitud");
+		chat.setRespuesta("Puedes visualizar una lista de libros de acuerdo a tu solicitud, si deseas puede realizar una nueva busqueda");
 end	
 
 rule "conversation4"
     when
-        chatInstance:ChatDTO(solicitud == "si");
+        chatInstance:ChatDTO(solicitud == "la piedra filosofal");
         
     then
-		chat.setRespuesta("Que autor es tu favorito");
+		chat.setRespuesta("Puedes visualizar una lista de libros de acuerdo a tu solicitud, si deseas puede realizar una nueva busqueda");
 	
 end	
 
