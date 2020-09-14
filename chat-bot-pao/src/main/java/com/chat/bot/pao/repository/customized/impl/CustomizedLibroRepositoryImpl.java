@@ -70,9 +70,10 @@ public class CustomizedLibroRepositoryImpl implements CustomizedLibroRepository 
 	@Override
 	public List<Libro> findLibroRecomendado(String nombreLibro) {
 		Query query = entityManager.createNativeQuery(
-				"SELECT * FROM LIBROS WHERE NOMBRE_LIBRO LIKE :nombreLibro or genero LIKE :genero", Libro.class);
+				"SELECT * FROM LIBROS WHERE NOMBRE_LIBRO LIKE :nombreLibro or genero LIKE :genero or autor LIKE :autor", Libro.class);
 		query.setParameter("nombreLibro", "%" + nombreLibro + "%");
 		query.setParameter("genero", "%" + nombreLibro + "%");
+		query.setParameter("autor", "%" + nombreLibro + "%");
 		List<Libro> lstLisbros = query.getResultList();
 		lstLisbros.forEach(libro -> {
 			HistorialBusqueda historialBusqueda = new HistorialBusqueda(null, libro.getNombreLibro(), libro.getAutor(),
