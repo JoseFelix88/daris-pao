@@ -2,7 +2,8 @@ function consultarLibro() {
 	var textSearch = $("#textSearch").val();
 	var parametro = $("#formConsultaLibro").serialize();
 	var url = $("#formConsultaLibro").attr("action");
-	url = url+ '/'+ textSearch;
+	var parampantalla = 'init';
+	url = url+ '/'+ textSearch +'/' + parampantalla;
 	$.ajax({
 		type : 'GET',
 		url : url,

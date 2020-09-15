@@ -1,5 +1,8 @@
 package com.chat.bot.pao;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,12 +18,23 @@ import org.thymeleaf.spring5.view.ThymeleafView;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import com.chat.bot.pao.model.PalabrasClave;
+import com.chat.bot.pao.repository.PalabraClaveRepository;
+
 @Configuration
 @SpringBootApplication
 public class ChatBotPaoApplication implements WebMvcConfigurer {
 
+	@Autowired 
+	private PalabraClaveRepository palabraClaveRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ChatBotPaoApplication.class, args);
+	}
+	
+	@Bean(name = "PalabrasClaves")
+	public List<PalabrasClave> listPalabrasClave(){
+		return (List<PalabrasClave>) palabraClaveRepository.findAll();
 	}
 
 	@Override

@@ -184,7 +184,8 @@ $( document ).ready(function() {
      function buscarRecomendaciones(mensaje_usuario){
     	 var parametro = $("#formConsultaLibro").serialize();
     		var url = '/dairis/consulta/libro';
-    		url = url+ '/'+ mensaje_usuario;
+    		var parampantalla = 'send';
+    		url = url+ '/'+ mensaje_usuario + '/' + parampantalla;
     		$.ajax({
     			type : 'GET',
     			url : url,
